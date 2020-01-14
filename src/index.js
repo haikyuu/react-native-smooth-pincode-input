@@ -213,7 +213,13 @@ class SmoothPinCodeInput extends Component {
         <TextInput
           disableFullscreenUI={disableFullscreenUI}
           value={value}
-          ref={this.inputRef}
+          ref={el=>{
+            if(this.props.inputRef){
+              return this.props.inputRef(this.inputRef)(el)
+            }else{
+              this.inputRef = el
+            }
+          }}
           onChangeText={this._inputCode}
           onKeyPress={this._keyPress}
           onFocus={() => this._onFocused()}
